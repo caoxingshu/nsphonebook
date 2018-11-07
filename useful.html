@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.js"></script>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="check_salary">
+					<a href="#">
+						<span class="mui-icon mui-icon-home"></span>
+						<div class="mui-media-body">工资查询</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="source_site">
+					<a href="#">
+						<span class="mui-icon mui-icon-email"><span class="mui-badge mui-badge-red">5</span></span>
+						<div class="mui-media-body">合作资源站点</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="check_certificate">
+					<a href="#">
+						<span class="mui-icon mui-icon-chatbubble"></span>
+						<div class="mui-media-body">教师资格证注册查询</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id='sign'>
+					<a href="#">
+						<span class="mui-icon mui-icon-location"></span>
+						<div class="mui-media-body">坐班签到</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id='waiting1'>
+					<a href="#">
+						<span class="mui-icon mui-icon-search"></span>
+						<div class="mui-media-body">等待开发</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id='waiting2'>
+					<a href="#">
+						<span class="mui-icon mui-icon-phone"></span>
+						<div class="mui-media-body">等待开发</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true,
+				keyEventBind: {
+					backbutton: true
+				}
+			});
+			mui.plusReady(function() {
+				mui(".mui-table-view.mui-grid-view.mui-grid-9").on("tap", "li", function() {
+					var targetUrl = this.id + ".html"
+					mui.openWindow({
+						url: targetUrl,
+						id: this.id,
+
+						styles: {
+							top: "45px",
+							bottom: "45px"
+//							height: window.innerHeight - 90 + "px"
+						}
+
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

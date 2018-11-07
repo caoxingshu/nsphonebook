@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style type="text/css">
+		.mui-card {
+			height: 100%;
+			!important margin-bottom: 0px;
+			!important margin-top: 0px;
+			!important
+		}
+		
+		.mui-content .mui-card .mui-card-header {
+			height: 100px;
+		}
+		
+		.slides li {
+			width: 300px;
+			!important float: left;
+		}
+		
+		.mui-card-content-inner {
+			margin-top: 50px;
+		}
+		
+		.mui-card-content-inner li {
+			line-height: 25px;
+		}
+		
+		.mui-card-footer {
+			/*padding-top: 30px;*/
+			/*line-height: 10px;*/
+		}
+		
+		.deal {
+			padding-left: 4em;
+		}
+		
+		.mui-collapse-content {
+			text-align: center;
+			margin-right: auto 10px;
+			line-height: 60px;
+			border: 1px solid rgba(243, 243, 243, 1);
+			background-color: rgba(243, 243, 243, 1);
+		}
+		
+		.mui-collapse-content .mui-icon {
+			width: 40%;
+			/*padding-left:20px;*/
+			line-height: 60px;
+			font-size: 36px;
+			color: skyblue;
+			/*font-weight: bold;*/
+			text-shadow: 0px 1px 1px black;
+			/*border-radius: 15px;*/
+			/*background-color: lavender;
+			-webkit-text-fill-color: #6641E2;*/
+		}
+	</style>
+
+	<body>
+
+		<div class="mui-content ">
+
+			<div class="mui-card ">
+				<div class="mui-card-header "><img src="img/banner03.png " / style="width:100%;height:100% ;border-radius: 10px; "> </div>
+				<div class="mui-card-content ">
+					<div id="bar " style="height:15px;border: 0px solid gray;margin-top:10px ; ">
+						<hr />
+						<span class="mui-icon mui-action mui-action-back mui-icon-left-nav"><h4 style="display: inline;color: rgb(80,70,70);font-size:16px;font-family: '微软雅黑';">返回</h4>
+							
+						</span><h3 style='text-align: center;padding-top: 10px;'><span class="mui-icon mui-icon-contact "style="font-size:36px;padding-right:10px "></span>联系人详情</h3></div>
+					<div class="mui-card-content-inner ">
+						<ul class="mui-table-view ">
+							<li class="mui-table-view-cell ">
+
+								教师姓名
+								<div id="usr_name" style="display:inline-block;width:100%; text-align: center;"></div>
+
+							</li>
+							<li class="mui-table-view-cell mui-collapse ">
+								<a class="mui-navigate-right ">
+									移动电话<span class="deal " id="mobile"></span>
+								</a>
+								<div class="mui-collapse-content "><span class="mui-icon mui-icon-phone-filled center " id="callMobile"></span><span class="mui-icon mui-icon-chatboxes-filled center " id="message"></span></div>
+							</li>
+							<li class="mui-table-view-cell mui-collapse ">
+								<a class="mui-navigate-right ">
+									集团号码<span class="deal " id="v_num"></span>
+								</a>
+								<div class="mui-collapse-content "><span class="mui-icon mui-icon-phone-filled center " id="callVNum"></span></div>
+							</li>
+							<li class="mui-table-view-cell mui-collapse ">
+								<a class="mui-navigate-right ">
+									所教科目<span class="deal " id="subject"></span>
+								</a>
+								<!--<div class="mui-collapse-content "><span class="mui-icon mui-icon-phone-filled center "></span><span class="mui-icon mui-icon-chatboxes-filled center "></span></div>-->
+							</li>
+
+							<li class="mui-table-view-cell mui-collapse ">
+								<a class="mui-navigate-right ">
+									所在职位<span class="deal " id="leader_name"></span>
+								</a>
+								<!--<div class="mui-collapse-content "><span class="mui-icon mui-icon-phone-filled center "></span><span class="mui-icon mui-icon-chatboxes-filled center "></span></div>-->
+							</li>
+							<!--<li class="mui-table-view-cell ">
+						            <a class="mui-navigate-right " id="leader_name ">
+						                 所在职位
+						            </a>
+						        </li>-->
+							<!--<li class="mui-table-view-cell ">
+						            <a class="mui-navigate-right " id="position ">
+						                 所在职位
+						            </a>
+						        </li>-->
+						</ul>
+					</div>
+				</div>
+				<div class="mui-card-footer mui-pull-right ">百年学府 源远流长</div>
+			</div>
+
+		</div>
+
+		<script src="js/mui.min.js "></script>
+		<script type="text/javascript ">
+			mui.init({
+				swipeBack:true,
+				keyEventBind:{
+					backbutton:true
+				}
+			});
+			mui.plusReady(function() {
+				//监听phonebook页面的传值
+				var self = plus.webview.currentWebview();
+				
+				document.querySelector("#mobile").innerText = self.details.phone1;
+				document.querySelector("#usr_name ").innerText = self.details.usr_name;
+				document.querySelector("#v_num ").innerText = self.details.v_num;
+				document.querySelector("#subject ").innerText = self.details.subject;
+				document.querySelector("#leader_name ").innerText = self.details.leader_name;
+				
+				//拨移动号码
+				document.querySelector("#callMobile").addEventListener("tap", function() {
+					var phoneNum = self.details.phone1;
+					plus.device.dial(phoneNum, false);
+				})
+				//发移动短信
+				document.querySelector("#message").addEventListener("tap", function() {
+					var phoneNum = self.details.phone1;
+					var msg = plus.messaging.createMessage(plus.messaging.TYPE_SMS);
+					msg.to = [phoneNum];
+//					msg.body = 'This is HTML5 Plus example test message';
+					plus.messaging.sendMessage(msg);
+				})
+				//拨集团号码
+				document.querySelector("#callVNum").addEventListener("tap", function() {
+					var phoneNum = self.details.v_num;
+					plus.device.dial(phoneNum, false);
+				})
+			})
+		</script>
+	</body>
+
+</html>
